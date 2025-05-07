@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>x</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rubik+Distressed&family=Poppins:wght@300;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@700&display=swap');
+
+  
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    background: radial-gradient(circle at center, #1a3b5e, #040d14);
+    font-family: 'Poppins', sans-serif;
+    color: #e0e7ff;
+    overflow: hidden;
+    position: relative;
+  }
+
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(66, 135, 245, 0.15) 20px, transparent 21px),
+      radial-gradient(circle at 80% 25%, rgba(157, 204, 255, 0.1) 20px, transparent 21px),
+      radial-gradient(circle at 40% 90%, rgba(119, 185, 255, 0.12) 25px, transparent 26px),
+      radial-gradient(circle at 70% 75%, rgba(179, 216, 255, 0.15) 18px, transparent 19px),
+      url('https://cdn.jsdelivr.net/gh/blackboxai/misc@master/math-bg-hex.svg'); /* A subtle hex pattern with math symbols */
+    background-repeat: repeat;
+    background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 400px 400px;
+    z-index: -3;
+    animation: slowspin 80s linear infinite;
+    opacity: 0.9;
+  }
+
+ 
+  body::after {
+    content: "∫ Σ π ∆ √ α β γ ∑ θ λ µ ∞ Ʃ ≈ ≠ ∂ ∇ ℵ ∃ ∀";
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    font-family: 'Rubik Distressed', cursive;
+    font-size: 11rem;
+    color: #4a90e2;
+    opacity: 0.04;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+    text-shadow:
+      0 0 12px #4a90e2aa,
+      0 0 25px #4a90e2cc;
+    animation: shimmer 6s ease-in-out infinite alternate;
+    z-index: -1;
+  }
+
+  @keyframes slowspin {
+    from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0;}
+    to { background-position: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 400px 400px;}
+  }
+
+  @keyframes shimmer {
+    0% { opacity: 0.03; }
+    50% { opacity: 0.07; }
+    100% { opacity: 0.03; }
+  }
+
+  
+  .container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  
+  .login-card {
+    background: rgba(20, 30, 50, 0.85);
+    border-radius: 24px;
+    padding: 3rem 2.25rem 2rem;
+    width: 320px;
+    max-width: 90vw;
+    box-shadow:
+      0 10px 30px rgba(74, 144, 226, 0.6),
+      inset 0 0 10px rgba(74, 144, 226, 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  
+  .login-card::before {
+    content: "";
+    position: absolute;
+    top: -10%; left: -10%;
+    width: 120%; height: 120%;
+    background: linear-gradient(45deg, #42a5f5, #1e88e5, #90caf9, #64b5f6);
+    filter: blur(15px);
+    opacity: 0.6;
+    animation: rotateGlow 10s linear infinite;
+    border-radius: 30px;
+    z-index: 0;
+  }
+
+  @keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  
+  .login-card h2 {
+    font-family: 'Spectral', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin: 0 0 1.5rem;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: #7ed6ff;
+    position: relative;
+    z-index: 1;
+    text-shadow:
+      0 0 8px #2e9afe,
+      0 0 15px #00b8ffcc;
+  }
+  .login-card h2::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+    filter: drop-shadow(0 0 5px #00b8ff);
+    z-index: -1;
+  }
+
+ 
+  form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+ 
+  input {
+    padding: 0.85rem 1.2rem;
+    font-size: 1.1rem;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    background: #122133;
+    color: #cbe9ff;
+    box-shadow:
+      inset 0 0 8px #1e88e5,
+      0 2px 6px rgba(18, 33, 51, 0.8);
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease,
+      background-color 0.3s ease;
+    margin-bottom: 1.4rem;
+    outline-offset: 3px;
+    caret-color: #82cfff;
+  }
+  input::placeholder {
+    color: #739fcc88;
+    font-style: italic;
+  }
+  input:focus {
+    border-color: #82cfff;
+    background: #1a2a4a;
+    box-shadow:
+      0 0 10px #82cfff,
+      inset 0 0 10px #4a90e2;
+  }
+
+  
+  button {
+    cursor: pointer;
+    padding: 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: #e0f7ff;
+    text-shadow: 0 0 5px #bae6ff;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+    box-shadow:
+      0 6px 18px #42a5f5cc,
+      inset 0 -3px 8px #1e88e5cc;
+    user-select: none;
+  }
+  button:hover, button:focus {
+    background: linear-gradient(135deg, #64b5f6, #42a5f5);
+    box-shadow:
+      0 8px 24px #64b5f6ee,
+      inset 0 -4px 10px #42a5f5dd;
+    outline: none;
+  }
+  button:active {
+    background: linear-gradient(135deg, #1e88e5, #1565c0);
+    box-shadow: 0 3px 10px #1565c0cc inset;
+  }
+
+ 
+  .error-msg {
+    background: #d32f2fcc;
+    box-shadow: 0 0 10px #d32f2fcc;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    color: #ffeaea;
+    letter-spacing: 0.02em;
+    user-select: none;
+  }
+
+ 
+  .math-symbol {
+    position: absolute;
+    font-family: 'Rubik Distressed', cursive;
+    color: #82cfff22;
+    user-select: none;
+    pointer-events: none;
+    text-shadow: 0 0 10px #4a90e222;
+    mix-blend-mode: screen;
+    animation-timing-function: ease-in-out;
+    will-change: transform;
+  }
+
+
+  .math-symbol.x1 { top: 10%; left: 8%; font-size: 5.2rem; animation: floatUpDown 6s infinite; animation-delay: 0s; }
+  .math-symbol.x2 { top: 75%; right: 10%; font-size: 4.2rem; animation: floatUpDown 7s infinite; animation-delay: 3.2s; }
+  .math-symbol.x3 { top: 50%; left: 90%; font-size: 3rem; animation: floatLeftRight 5.5s infinite; animation-delay: 1.1s; }
+  .math-symbol.x4 { bottom: 12%; left: 45%; font-size: 4rem; animation: floatUpDown 7.7s infinite; animation-delay: 4.5s; }
+  .math-symbol.x5 { top: 20%; right: 5%; font-size: 3.5rem; animation: floatLeftRight 6.2s infinite; animation-delay: 2.1s; }
+  .math-symbol.x6 { bottom: 40%; left: 10%; font-size: 2.8rem; animation: floatUpDown 5.2s infinite; animation-delay: 5.1s; }
+  .math-symbol.x7 { top: 5%; left: 50%; font-size: 3.8rem; animation: floatLeftRight 6.8s infinite; animation-delay: 4.3s; }
+  .math-symbol.x8 { bottom: 25%; right: 55%; font-size: 3rem; animation: floatUpDown 6.5s infinite; animation-delay: 3.5s; }
+
+  @keyframes floatUpDown {
+    0%, 100% { transform: translateY(0);}
+    50% { transform: translateY(-12px);}
+  }
+  @keyframes floatLeftRight {
+    0%, 100% { transform: translateX(0);}
+    50% { transform: translateX(12px);}
+  }
+
+  
+  @media (max-width: 400px) {
+    .login-card {
+      width: 90vw;
+      padding: 2.75rem 1.8rem 1.8rem;
+      border-radius: 20px;
+    }
+    .login-card h2 {
+      font-size: 2.2rem;
+    }
+    input {
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+    }
+    button {
+      font-size: 1.1rem;
+      padding: 0.85rem 0;
+    }
+    .math-symbol {
+      font-size: 3.5rem !important;
+    }
+    .math-symbol.x6 {
+      font-size: 2.3rem !important;
+    }
+    .math-symbol.x8 {
+      font-size: 2.8rem !important;
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+
+  @keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.95); }
+  }
+
+
+  .fad-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+
+  .fade-out {
+    animation: fadeOut 0.6s ease-in forwards;
+  }
+
+</style>
+</head>
+<body>
+  <body class="fade-in"></body>
+  <div class="container" role="main" aria-label="Formulario de inicio de sesión">
+    <div class="login-card" aria-live="polite" aria-atomic="true" aria-relevant="additions">
+      <h2>Iniciar Sesión</h2>
+
+      <span class="math-symbol x1" aria-hidden="true">∑</span>
+      <span class="math-symbol x2" aria-hidden="true">√</span>
+      <span class="math-symbol x3" aria-hidden="true">∫</span>
+      <span class="math-symbol x4" aria-hidden="true">π</span>
+      <span class="math-symbol x5" aria-hidden="true">∆</span>
+      <span class="math-symbol x6" aria-hidden="true">θ</span>
+      <span class="math-symbol x7" aria-hidden="true">λ</span>
+      <span class="math-symbol x8" aria-hidden="true">∞</span>
+
+      <form id="loginForm" novalidate>
+        <div id="errorContainer" class="error-msg" style="display:none;" role="alert" aria-live="assertive"></div>
+        <input type="text" id="username" name="username" placeholder="Usuario o correo electrónico" autocomplete="username" required aria-required="true" aria-describedby="usernameHelp" />
+        <input type="password" id="password" name="password" placeholder="Contraseña" autocomplete="current-password" required aria-required="true" aria-describedby="passwordHelp" />
+        <button type="submit" aria-label="Iniciar sesión">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+   (function() {
+  const form = document.getElementById('loginForm');
+  const errorContainer = document.getElementById('errorContainer');
+
+  function validateEmail(email) {
+    const re = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+    return re.test(email);
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    errorContainer.style.display = 'none';
+    errorContainer.textContent = '';
+
+    const username = form.username.value.trim();
+    const password = form.password.value.trim();
+
+    if (!username) {
+      showError('Por favor ingresa tu usuario o correo electrónico.');
+      form.username.focus();
+      return;
+    }
+
+    if (username.includes('@') && !validateEmail(username)) {
+      showError('Por favor ingresa un correo electrónico válido.');
+      form.username.focus();
+      return;
+    }
+
+    if (!password) {
+      showError('Por favor ingresa tu contraseña.');
+      form.password.focus();
+      return;
+    }
+
+    if (username !== 'UPN' || password !== '2025') {
+      showError('Usuario o contraseña incorrectos.');
+      return;
+    }
+
+    
+    document.body.classList.remove('fade-in');
+document.body.classList.add('fade-out');
+
+setTimeout(() => {
+  window.location.href = 'CARGA HTML.html';
+}, 600); //
+  });
+
+  function showError(message) {
+    errorContainer.textContent = message;
+    errorContainer.style.display = 'block';
+  }
+})();
+  </script>
+</body>
+</html>
+</content>
+</create_file>

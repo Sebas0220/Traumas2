@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cargando...</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      background: #1b1f27; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Rubik Distressed', cursive;
+      color: #bec5cc;
+      user-select: none;
+    }
+
+    .loader-wrapper {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.02); 
+      backdrop-filter: blur(6px); 
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    svg {
+      width: 160px;
+      height: 160px;
+      transform: rotate(-90deg);
+      display: block;
+    }
+
+    circle {
+      fill: none;
+      stroke-width: 10;
+      stroke-linecap: round;
+    }
+
+    circle.bg {
+      stroke: #3a3f4a;
+    }
+
+    circle.progress {
+      stroke: #8a99b8;
+      stroke-dasharray: 440;
+      stroke-dashoffset: 440;
+      transition: stroke-dashoffset 0.35s ease-out;
+    }
+
+    .pi-symbol {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: translate(-50%, -55%) rotate(0deg);
+      font-size: 5rem;
+      color: #8a99b8;
+      text-shadow: 0 0 8px rgba(138, 153, 184, 0.6);
+      animation: spin 4s linear infinite;
+    }
+
+    .percentage-text {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #bec5cc;
+      letter-spacing: 0.06em;
+      user-select: none;
+    }
+
+    .loading-text {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #8892a0;
+      letter-spacing: 0.04em;
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -55%) rotate(0deg); }
+      to { transform: translate(-50%, -55%) rotate(360deg); }
+    }
+
+    @media (max-width: 400px) {
+      .loader-wrapper {
+        width: 130px;
+        height: 130px;
+      }
+      svg {
+        width: 130px;
+        height: 130px;
+      }
+      .pi-symbol {
+        font-size: 4rem;
+      }
+      .percentage-text {
+        font-size: 0.85rem;
+        top: 72%;
+      }
+      .loading-text {
+        font-size: 1rem;
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="loader-wrapper" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Cargando">
+      <svg aria-hidden="true" focusable="false">
+        <circle class="bg" cx="80" cy="80" r="70" />
+        <circle class="progress" cx="80" cy="80" r="70" />
+      </svg>
+      <div class="pi-symbol" aria-hidden="true">π</div>
+      <div class="percentage-text" id="percentage">0%</div>
+    </div>
+    <div class="loading-text" aria-hidden="true">Cargando...</div>
+  </div>
+
+  <script>
+   (function(){
+  const progressCircle = document.querySelector('.progress');
+  const percentageText = document.getElementById('percentage');
+  const loaderWrapper = document.querySelector('.loader-wrapper');
+  const radius = 70;
+  const circumference = 2 * Math.PI * radius;
+
+  progressCircle.style.strokeDasharray = circumference;
+  progressCircle.style.strokeDashoffset = circumference;
+
+  let currentPercentage = 0;
+  const duration = 5000;
+  const stepTime = 50;
+  const steps = duration / stepTime;
+  let stepCount = 0;
+
+  function updateProgress() {
+    stepCount++;
+    currentPercentage = Math.min(100, Math.round((stepCount / steps) * 100));
+    const offset = circumference - (currentPercentage / 100) * circumference;
+    progressCircle.style.strokeDashoffset = offset;
+    percentageText.textContent = currentPercentage + '%';
+    loaderWrapper.setAttribute('aria-valuenow', currentPercentage);
+
+    if (currentPercentage < 100) {
+      setTimeout(updateProgress, stepTime);
+    } else {
+    
+      loaderWrapper.style.transition = 'opacity 1s ease';
+      loaderWrapper.style.opacity = '0';
+
+      
+      setTimeout(() => {
+        window.location.href = 'blanco.html'; 
+      }, 1000); 
+    }
+  }
+
+  updateProgress();
+})();
+
+
+  </script>
+</body>
+</html>
